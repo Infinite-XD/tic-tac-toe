@@ -7,7 +7,7 @@ class Board
   end
 
   def self.create_board
-    Array.new(3) { Array.new(3, " ") }
+    Array.new(3) { Array.new(3, "_") }
   end
 
   def check_victory(arr)
