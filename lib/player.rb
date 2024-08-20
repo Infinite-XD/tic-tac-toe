@@ -9,7 +9,7 @@ class Player
 
   def pos_finder(pos)
     pos_arr = pos.chars
-    case pos_arr[0]
+    case pos_arr[0].upcase
     when "A"
       pos_arr[0] = 0
     when "B"
@@ -20,8 +20,14 @@ class Player
     pos_arr
   end
 
-  def move(pos)
+  def move(pos) # rubocop:disable Metrics/AbcSize
     position = pos_finder(pos)
-    @board.board[position[0]][position[1].to_i - 1] = id
+    if @board.board[position[0]][position[1].to_i - 1] == "_"
+      @board.board[position[0]][position[1].to_i - 1] = id
+      true
+    else
+      puts "Sorry that spot is already taken! Try again!\n"
+      false
+    end
   end
 end

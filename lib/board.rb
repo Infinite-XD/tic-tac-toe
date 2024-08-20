@@ -10,6 +10,12 @@ class Board
     Array.new(3) { Array.new(3, "_") }
   end
 
+  def final_check(arr)
+    return true if check_horizontal(arr) == true || check_vertical(arr) == true || check_diagnol(arr) == true
+
+    false
+  end
+
   def check_victory(arr)
     true if arr.all? { |item| item == "X" } || arr.all? { |item| item == "Y" }
   end
@@ -27,7 +33,6 @@ class Board
       3.times do |number|
         temp.push(arr[number][num])
       end
-      p temp
       return true if check_victory(temp) == true
 
       temp = []
@@ -42,13 +47,11 @@ class Board
     end
     return true if check_victory(temp) == true
 
-    p temp
     temp = []
     reversed_arr = arr.reverse
     3.times do |number|
       temp.push(reversed_arr[number][number])
     end
-    p temp
     return true if check_victory(temp) == true
 
     false

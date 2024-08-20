@@ -34,12 +34,18 @@ class Game
       puts "\nEnter a move: "
       move_pos = getpos
       if current.zero?
-        player1.move(move_pos)
-        current = 1
+        taken = player1.move(move_pos)
+        current = 1 if taken == true
       else
-        player2.move(move_pos)
-        current = 0
+        taken = player2.move(move_pos)
+        current = 0 if taken == true
       end
+      @game_over = @board.final_check(board.board)
+    end
+    if current.zero?
+      puts "Player 1 wins!"
+    else
+      puts "Player 2 wins!"
     end
   end
 end
