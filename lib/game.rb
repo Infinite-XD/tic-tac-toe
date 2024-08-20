@@ -16,12 +16,23 @@ class Game
     end
   end
 
+  def getpos
+    letters = %w[A B C]
+    numbers = %w[1 2 3]
+    move_pos = gets.chomp
+    while move_pos.length != 2 || !letters.include?(move_pos[0].upcase) || !numbers.include?(move_pos[1])
+      puts "\nEnter a VALID move: "
+      move_pos = gets.chomp
+    end
+    move_pos
+  end
+
   def play # rubocop:disable Metrics/MethodLength
     current = 0
     while @game_over == false
       display
       puts "\nEnter a move: "
-      move_pos = gets.chomp
+      move_pos = getpos
       if current.zero?
         player1.move(move_pos)
         current = 1
