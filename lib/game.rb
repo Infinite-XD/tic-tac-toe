@@ -9,11 +9,13 @@ class Game
     @game_over = false
   end
 
-  def display
+  def display # rubocop:disable Metrics/AbcSize
+    puts "---------------"
     puts "  1   2    3"
     ("A".."C").each_with_index do |letter, index|
       puts "#{letter} #{board.board[index][0]} | #{board.board[index][1]} | #{board.board[index][2]}"
     end
+    puts "---------------"
   end
 
   def getpos
@@ -21,7 +23,7 @@ class Game
     numbers = %w[1 2 3]
     move_pos = gets.chomp
     while move_pos.length != 2 || !letters.include?(move_pos[0].upcase) || !numbers.include?(move_pos[1])
-      puts "\nEnter a VALID move: "
+      print "\nEnter a VALID move: "
       move_pos = gets.chomp
     end
     move_pos
@@ -31,7 +33,7 @@ class Game
     current = 0
     while @game_over == false
       display
-      puts "\nEnter a move: "
+      print "\nEnter a move: "
       move_pos = getpos
       if current.zero?
         taken = player1.move(move_pos)
@@ -43,9 +45,10 @@ class Game
       @game_over = @board.final_check(board.board)
     end
     if current.zero?
-      puts "Player 1 wins!"
-    else
       puts "Player 2 wins!"
+    else
+      puts "Player 1 wins!"
     end
+    display
   end
 end
