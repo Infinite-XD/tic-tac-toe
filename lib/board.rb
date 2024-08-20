@@ -35,11 +35,21 @@ class Board
     false
   end
 
-  def check_diagnol(arr)
+  def check_diagnol(arr) # rubocop:disable Metrics/MethodLength
     temp = []
     3.times do |number|
       temp.push(arr[number][number])
     end
+    return true if check_victory(temp) == true
+
+    p temp
+    temp = []
+    reversed_arr = arr.reverse
+    3.times do |number|
+      temp.push(reversed_arr[number][number])
+    end
+    p temp
+    return true if check_victory(temp) == true
 
     false
   end
